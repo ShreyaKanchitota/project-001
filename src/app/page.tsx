@@ -8,6 +8,7 @@ import Gallery from "@/app/components/Gallery";
 import Stats from "@/app/components/Stats";
 import FloatingCTA from "@/app/components/FloatingCTA";
 import FAQ from "@/app/components/FAQ";
+import Contact from "@/app/components/Contact";
 
 export default function Home() {
   return (
@@ -32,6 +33,7 @@ export default function Home() {
 <Pricing />
 <Testimonials />
 <FAQ />
+<Contact />
 <Footer />
 <FloatingCTA />
     </main>

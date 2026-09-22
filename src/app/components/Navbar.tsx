@@ -23,24 +23,45 @@ export default function Navbar() {
       }`}
     >
       <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-6">
-        <h1 className="text-xl font-black tracking-[0.2em]">GYMHQ</h1>
+        {/* Logo */}
+        <h1 className="text-xl font-black tracking-[0.2em] text-white">
+          GYMHQ
+        </h1>
 
-        {/* Desktop */}
+        {/* Desktop Navigation */}
         <div className="hidden items-center gap-8 md:flex">
-          <a href="#features" className="text-sm text-zinc-300 hover:text-white transition">
+          <a
+            href="#features"
+            className="text-sm text-zinc-300 transition hover:text-white"
+          >
             Programs
           </a>
-          <a href="#pricing" className="text-sm text-zinc-300 hover:text-white transition">
+
+          <a
+            href="#pricing"
+            className="text-sm text-zinc-300 transition hover:text-white"
+          >
             Pricing
           </a>
-          <a href="#testimonials" className="text-sm text-zinc-300 hover:text-white transition">
+
+          <a
+            href="#testimonials"
+            className="text-sm text-zinc-300 transition hover:text-white"
+          >
             Results
+          </a>
+
+          <a
+            href="#contact"
+            className="text-sm text-zinc-300 transition hover:text-white"
+          >
+            Contact
           </a>
 
           <Buttons>Join Now</Buttons>
         </div>
 
-        {/* Mobile */}
+        {/* Mobile Hamburger */}
         <button
           onClick={() => setOpen(!open)}
           className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 md:hidden"
@@ -65,6 +86,7 @@ export default function Navbar() {
         </button>
       </div>
 
+      {/* Mobile Menu */}
       {open && (
         <div className="border-t border-white/10 bg-black/95 md:hidden">
           <div className="flex flex-col px-6 py-6">
@@ -90,6 +112,14 @@ export default function Navbar() {
               className="py-3 text-zinc-300 hover:text-white"
             >
               Results
+            </a>
+
+            <a
+              href="#contact"
+              onClick={() => setOpen(false)}
+              className="py-3 text-zinc-300 hover:text-white"
+            >
+              Contact
             </a>
 
             <div className="mt-4">
