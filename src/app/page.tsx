@@ -4,6 +4,9 @@ import Features from "@/app/components/Features";
 import Pricing from "@/app/components/Pricing";
 import Testimonials from "@/app/components/Testimonials";
 import Footer from "@/app/components/Footer";
+import Gallery from "@/app/components/Gallery";
+import Stats from "@/app/components/Stats";
+import FloatingCTA from "@/app/components/FloatingCTA";
 
 export default function Home() {
   return (
@@ -21,11 +24,14 @@ export default function Home() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.12),transparent_55%)]" />
 
       <Navbar />
-      <Hero />
-      <Features />
-      <Pricing />
-      <Testimonials />
-      <Footer />
+<Hero />
+<Stats />
+<Features />
+<Gallery />
+<Pricing />
+<Testimonials />
+<Footer />
+<FloatingCTA />
     </main>
   );
 }

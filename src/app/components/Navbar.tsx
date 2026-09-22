@@ -1,29 +1,90 @@
+"use client";
+
+import { useState } from "react";
 import Buttons from "./Buttons";
 
 export default function Navbar() {
+  const [open, setOpen] = useState(false);
+
   return (
-    <nav className="fixed top-0 z-50 flex w-full items-center justify-between border-b border-white/10 bg-black/30 px-8 py-5 backdrop-blur-xl">
-      <h1 className="text-xl font-bold tracking-wide">GYMHQ</h1>
+    <nav className="fixed top-0 z-50 w-full border-b border-white/10 bg-black/30 backdrop-blur-xl">
+      <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-6">
+        <h1 className="text-xl font-black tracking-[0.2em]">GYMHQ</h1>
 
-      <div className="hidden gap-8 text-sm md:flex">
-        <a href="#features" className="hover:text-zinc-300 transition">
-          Programs
-        </a>
+        {/* Desktop */}
+        <div className="hidden items-center gap-8 md:flex">
+          <a href="#features" className="text-sm text-zinc-300 hover:text-white transition">
+            Programs
+          </a>
+          <a href="#pricing" className="text-sm text-zinc-300 hover:text-white transition">
+            Pricing
+          </a>
+          <a href="#testimonials" className="text-sm text-zinc-300 hover:text-white transition">
+            Results
+          </a>
 
-        <a href="#testimonials" className="hover:text-zinc-300 transition">
-          Coaches
-        </a>
+          <Buttons>Join Now</Buttons>
+        </div>
 
-        <a href="#pricing" className="hover:text-zinc-300 transition">
-          Pricing
-        </a>
-
-        <a href="#footer" className="hover:text-zinc-300 transition">
-          Contact
-        </a>
+        {/* Mobile Button */}
+        <button
+          onClick={() => setOpen(!open)}
+          className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 md:hidden"
+        >
+          <div className="space-y-1.5">
+            <div
+              className={`h-0.5 w-5 bg-white transition ${
+                open ? "translate-y-2 rotate-45" : ""
+              }`}
+            />
+            <div
+              className={`h-0.5 w-5 bg-white transition ${
+                open ? "opacity-0" : ""
+              }`}
+            />
+            <div
+              className={`h-0.5 w-5 bg-white transition ${
+                open ? "-translate-y-2 -rotate-45" : ""
+              }`}
+            />
+          </div>
+        </button>
       </div>
 
-      <Buttons>Join Now</Buttons>
+      {/* Mobile Menu */}
+      {open && (
+        <div className="border-t border-white/10 bg-black/95 md:hidden">
+          <div className="flex flex-col px-6 py-6">
+            <a
+              href="#features"
+              onClick={() => setOpen(false)}
+              className="py-3 text-zinc-300 hover:text-white"
+            >
+              Programs
+            </a>
+
+            <a
+              href="#pricing"
+              onClick={() => setOpen(false)}
+              className="py-3 text-zinc-300 hover:text-white"
+            >
+              Pricing
+            </a>
+
+            <a
+              href="#testimonials"
+              onClick={() => setOpen(false)}
+              className="py-3 text-zinc-300 hover:text-white"
+            >
+              Results
+            </a>
+
+            <div className="mt-4">
+              <Buttons>Book Trial</Buttons>
+            </div>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }
