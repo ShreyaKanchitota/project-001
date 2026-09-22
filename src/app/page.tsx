@@ -7,6 +7,7 @@ import Footer from "@/app/components/Footer";
 import Gallery from "@/app/components/Gallery";
 import Stats from "@/app/components/Stats";
 import FloatingCTA from "@/app/components/FloatingCTA";
+import FAQ from "@/app/components/FAQ";
 
 export default function Home() {
   return (
@@ -30,6 +31,7 @@ export default function Home() {
 <Gallery />
 <Pricing />
 <Testimonials />
+<FAQ />
 <Footer />
 <FloatingCTA />
     </main>

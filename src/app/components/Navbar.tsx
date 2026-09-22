@@ -1,13 +1,27 @@
 "use client";
 
 import { useState } from "react";
+import { useScroll, useMotionValueEvent } from "framer-motion";
 import Buttons from "./Buttons";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  const { scrollY } = useScroll();
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    setScrolled(latest > 80);
+  });
 
   return (
-    <nav className="fixed top-0 z-50 w-full border-b border-white/10 bg-black/30 backdrop-blur-xl">
+    <nav
+      className={`fixed top-0 z-50 w-full border-b transition-all duration-500 ${
+        scrolled
+          ? "border-white/10 bg-black/80 backdrop-blur-2xl shadow-2xl"
+          : "border-transparent bg-black/20 backdrop-blur-md"
+      }`}
+    >
       <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-6">
         <h1 className="text-xl font-black tracking-[0.2em]">GYMHQ</h1>
 
@@ -26,7 +40,7 @@ export default function Navbar() {
           <Buttons>Join Now</Buttons>
         </div>
 
-        {/* Mobile Button */}
+        {/* Mobile */}
         <button
           onClick={() => setOpen(!open)}
           className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 md:hidden"
@@ -51,7 +65,6 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile Menu */}
       {open && (
         <div className="border-t border-white/10 bg-black/95 md:hidden">
           <div className="flex flex-col px-6 py-6">
