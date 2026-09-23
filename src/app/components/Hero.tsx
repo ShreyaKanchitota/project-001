@@ -84,6 +84,7 @@ export default function Hero() {
           <div className="mt-2 h-3 w-1 rounded-full bg-white" />
         </div>
       </motion.div>
+      <div className="absolute bottom-0 left-0 h-32 w-full bg-gradient-to-b from-transparent to-black pointer-events-none" />
     </section>
   );
 }

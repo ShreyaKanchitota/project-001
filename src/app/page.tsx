@@ -9,10 +9,14 @@ import Stats from "@/app/components/Stats";
 import FloatingCTA from "@/app/components/FloatingCTA";
 import FAQ from "@/app/components/FAQ";
 import Contact from "@/app/components/Contact";
+import SectionDivider from "./components/SectionDivider";
+import ScrollProgress from "./components/ScrollProgress";
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen overflow-hidden text-white">
+    <main className="relative min-h-screen overflow-x-hidden text-white">
+  <ScrollProgress />
+
       {/* Background */}
       <div
         className="absolute inset-0 bg-cover bg-center"
@@ -26,15 +30,35 @@ export default function Home() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.12),transparent_55%)]" />
 
       <Navbar />
+
 <Hero />
+
+<SectionDivider />
+
 <Stats />
+
+<SectionDivider />
+
 <Features />
+
+<SectionDivider />
+
 <Gallery />
+
+<SectionDivider />
+
 <Pricing />
+
+<SectionDivider />
+
 <Testimonials />
+
 <FAQ />
+
 <Contact />
+
 <Footer />
+
 <FloatingCTA />
     </main>
   );

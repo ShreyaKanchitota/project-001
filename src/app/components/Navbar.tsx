@@ -1,18 +1,46 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useScroll, useMotionValueEvent } from "framer-motion";
 import Buttons from "./Buttons";
+
+const sections = [
+  { id: "features", label: "Programs" },
+  { id: "pricing", label: "Pricing" },
+  { id: "testimonials", label: "Results" },
+  { id: "contact", label: "Contact" },
+];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [active, setActive] = useState("features");
 
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     setScrolled(latest > 80);
   });
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.find((entry) => entry.isIntersecting);
+        if (visible) setActive(visible.target.id);
+      },
+      {
+        threshold: 0.35,
+        rootMargin: "-20% 0px -40% 0px",
+      }
+    );
+
+    sections.forEach((section) => {
+      const el = document.getElementById(section.id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <nav
@@ -24,41 +52,30 @@ export default function Navbar() {
     >
       <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-6">
         {/* Logo */}
-        <h1 className="text-xl font-black tracking-[0.2em] text-white">
+        <a
+          href="/"
+          className="text-xl font-black tracking-[0.2em] text-white"
+        >
           GYMHQ
-        </h1>
+        </a>
 
         {/* Desktop Navigation */}
         <div className="hidden items-center gap-8 md:flex">
-          <a
-            href="#features"
-            className="text-sm text-zinc-300 transition hover:text-white"
-          >
-            Programs
-          </a>
+          {sections.map((item) => (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              className={`text-sm transition ${
+                active === item.id
+                  ? "font-semibold text-white"
+                  : "text-zinc-400 hover:text-white"
+              }`}
+            >
+              {item.label}
+            </a>
+          ))}
 
-          <a
-            href="#pricing"
-            className="text-sm text-zinc-300 transition hover:text-white"
-          >
-            Pricing
-          </a>
-
-          <a
-            href="#testimonials"
-            className="text-sm text-zinc-300 transition hover:text-white"
-          >
-            Results
-          </a>
-
-          <a
-            href="#contact"
-            className="text-sm text-zinc-300 transition hover:text-white"
-          >
-            Contact
-          </a>
-
-          <Buttons>Join Now</Buttons>
+          <Buttons href="#contact">Join Now</Buttons>
         </div>
 
         {/* Mobile Hamburger */}
@@ -90,40 +107,23 @@ export default function Navbar() {
       {open && (
         <div className="border-t border-white/10 bg-black/95 md:hidden">
           <div className="flex flex-col px-6 py-6">
-            <a
-              href="#features"
-              onClick={() => setOpen(false)}
-              className="py-3 text-zinc-300 hover:text-white"
-            >
-              Programs
-            </a>
-
-            <a
-              href="#pricing"
-              onClick={() => setOpen(false)}
-              className="py-3 text-zinc-300 hover:text-white"
-            >
-              Pricing
-            </a>
-
-            <a
-              href="#testimonials"
-              onClick={() => setOpen(false)}
-              className="py-3 text-zinc-300 hover:text-white"
-            >
-              Results
-            </a>
-
-            <a
-              href="#contact"
-              onClick={() => setOpen(false)}
-              className="py-3 text-zinc-300 hover:text-white"
-            >
-              Contact
-            </a>
+            {sections.map((item) => (
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                onClick={() => setOpen(false)}
+                className={`py-3 transition ${
+                  active === item.id
+                    ? "font-semibold text-white"
+                    : "text-zinc-400 hover:text-white"
+                }`}
+              >
+                {item.label}
+              </a>
+            ))}
 
             <div className="mt-4">
-              <Buttons>Book Trial</Buttons>
+              <Buttons href="#contact">Book Trial</Buttons>
             </div>
           </div>
         </div>
